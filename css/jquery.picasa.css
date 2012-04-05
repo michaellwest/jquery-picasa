@@ -1,0 +1,19 @@
+body {
+	background: #1F1F1F;
+}
+
+.picasa-album li {
+	list-style: none;
+	display: inline-block !important;
+	background: none !important;
+	margin: 10px;
+}
+li.picasa-image {
+	text-decoration: none;
+}
+img.picasa-image-thumb {
+	padding: 7px;
+}
+img.loader {
+	padding: 57px;
+}

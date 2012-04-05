@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>sample-albums</title>
+<!--[if IE]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<style>
+  article, aside, figure, footer, header, hgroup, 
+  menu, nav, section { display: block; }
+</style>
+<link rel="stylesheet" type="text/css" href="css/jquery.picasa.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="css/prettyPhoto.css" media="screen" />
+</head>
+<body>
+  <div id="picasa-gallery">
+  </div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.picasa.js"></script>
+  	<script type="text/javascript" src="js/jquery.prettyPhoto.js"></script>
+	<script type="text/javascript" src="js/jquery.jail.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			var userId = "104806763597775491739";
+
+			$('#picasa-gallery').picasa('init', {
+				'imageSize': 720,
+				'loader' : 'images/loader.gif'
+			}).picasa('gallery', userId, function () {
+				this.find("img[rel^='picasa-album']").jail().removeClass('loader');
+				$("a[rel^='picasa-album']", this).prettyPhoto({
+					'animation_speed': 'normal',
+					'theme': 'dark_rounded',
+					'slideshow': 3000,
+					'social_tools': false
+				});
+			});
+		});
+	</script>
+</body>
+</html>
