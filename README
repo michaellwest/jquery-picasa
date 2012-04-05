@@ -1,8 +1,9 @@
---Michael West
-This plugin is designed to simplify the access to Google's Picasa image 
+# jQuery Picasa Plugin
+
+This [jQuery][jquery_site] plugin is designed to simplify the access to Google's Picasa image 
 gallery. 
 
-Setup
+## Usage
 
 Add these two scripts:
 <!-- Specify jQuery however you like. -->
@@ -27,3 +28,10 @@ var albumId = "YOUR_ALBUM_ID";
 $('#picasa-gallery').picasa('gallery', userId, albumId);
 
 
+## License
+
+Under the same licenses as the jQuery library itself: <http://docs.jquery.com/License>
+
+## Credits
+
+jQuery picasa is made by [Michael West]
