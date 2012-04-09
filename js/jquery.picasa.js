@@ -35,9 +35,18 @@
 		return content;
 	};
 
+    Array.prototype.indexOf = Array.prototype.indexOf || function(item) {
+        for(var i = 0; i < this.length; i++) {
+            if(this[i] === item) {
+                return i;
+            }
+        }
+        return -1;
+    };
+
 	function Photo(id, title, description, image, thumbs) {
 		this.id = id;
-		this.title = title;
+		this.title = (title === "[UNSET]") ? "" : title;
 		this.description = description;
 		this.image = image;
 		this.thumbs = thumbs;
@@ -125,9 +134,9 @@
 		},
 
 		_image: function (albumId, photo, callback) {
-			var ul = $(this);
+			var divAlbum = $(this);
 			var source = defaultOptions.loader;
-			var li = $(document.createElement('li')).addClass('picasa-image').attr({
+			var divImage = $(document.createElement('div')).addClass('picasa-image').attr({
 				'rel': 'picasa-album[' + albumId + ']'
 			});
 			var a = $(document.createElement('a')).addClass('picasa-image-large').attr({
@@ -139,12 +148,14 @@
 				'rel': 'picasa-album[' + albumId + ']',
 				'data-href': photo.thumbs[0]
 			});
+			var divTitle = $(document.createElement('div')).addClass('picasa-image-title').html(photo.title);
 			if (source) {
 				img.addClass('loader');
 			}
 			a.append(img[0]);
-			li.append(a[0]);
-			ul.append(li[0]);
+			divImage.append(a[0]);
+			divImage.append(divTitle[0]);
+			divAlbum.append(divImage[0]);
 
 			if (photo.images) {
 				photo.images(function (images) {
@@ -154,17 +165,17 @@
 								'href': image.image.url,
 								'rel': 'picasa-album[' + albumId + ']'
 							});
-							$('li' + "[rel='picasa-album[" + albumId + "]']", ul).append(a[0]);
+							$('.picasa-image' + "[rel='picasa-album[" + albumId + "]']", divAlbum).append(a[0]);
 						}
 					});
 
 					if (callback) {
-						callback.apply(li);
+						callback.apply(divImage);
 					}
 				});
 			}
 
-			return ul;
+			return divAlbum;
 		},
 
 		gallery: function (userId, albumId, callback) {
@@ -176,16 +187,16 @@
 				albumId = undefined;
 			}
 
-			if (albumId) {
+			if (albumId && !(albumId instanceof Array)) {
 				methods.images(userId, albumId, function (photos) {
 					if (callback && defaultOptions.overrideLayout) {
 						callback.apply(scope, photos);
 					} else {
-						var ul = $(document.createElement('ul')).addClass('picasa-album');
+						var div = $(document.createElement('div')).addClass('picasa-album');
 						$.each(photos, function (index, photo) {
-							methods._image.apply(ul, [albumId, photo]);
+							methods._image.apply(div, [albumId, photo]);
 						});
-						scope.append(ul[0]);
+						scope.append(div[0]);
 						if (callback) {
 							callback.apply(scope);
 						}
@@ -196,12 +207,14 @@
 					if (callback && defaultOptions.overrideLayout) {
 						callback.apply(scope, photos);
 					} else {
-						var ul = $(document.createElement('ul')).addClass('picasa-album');
+						var div = $(document.createElement('div')).addClass('picasa-album');
 						$.each(photos, function (index, photo) {
-							methods._image.apply(ul, [photo.id, photo, callback]);
+							if (!albumId || albumId.indexOf(photo.id) !== -1) {
+								methods._image.apply(div, [photo.id, photo, callback]);
+							}
 						});
 
-						scope.append(ul[0]);
+						scope.append(div[0]);
 						if (callback) {
 							callback.apply(scope);
 						}

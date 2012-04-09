@@ -2,18 +2,26 @@ body {
 	background: #1F1F1F;
 }
 
-.picasa-album li {
-	list-style: none;
+.picasa-album {
 	display: inline-block !important;
 	background: none !important;
+}
+.picasa-image {
+	display: inline-block;
 	margin: 10px;
 }
-li.picasa-image {
-	text-decoration: none;
+
+.picasa-image-title {
+	margin: 10px;
+	margin-top: 3px;
+	color: white;
 }
-img.picasa-image-thumb {
+
+.picasa-image-thumb {
 	padding: 7px;
+	padding-bottom: 3px;
 }
-img.loader {
+
+.loader {
 	padding: 57px;
 }

@@ -25,9 +25,9 @@
 			var userId = "104806763597775491739";
 
 			$('#picasa-gallery').picasa('init', {
-				'imageSize': 720,
+				'imagesize': 720,
 				'loader' : 'images/loader.gif'
-			}).picasa('gallery', userId, function () {
+			}).picasa('gallery', userId, ['5703952790631045089', '5682651846117435169'], function () {
 				this.find("img[rel^='picasa-album']").jail().removeClass('loader');
 				$("a[rel^='picasa-album']", this).prettyPhoto({
 					'animation_speed': 'normal',
