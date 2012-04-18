@@ -28,9 +28,9 @@
 			$('#picasa-gallery').picasa('init', {
 				'imagesize': 720,
 				'loader' : 'images/loader.gif'
-			}).picasa('gallery', userId, albumId, function () {
-				this.find("img[rel^='picasa-album']").jail().removeClass('loader');
-				$("a[rel^='picasa-album']", this).prettyPhoto({
+			}).picasa('gallery', userId, albumId, function (album) {
+				//this.find("img[rel^='picasa-album']").jail().removeClass('loader');
+				$(".picasa-image a[rel^='picasa-album[" + album + "]']", this).prettyPhoto({
 					'animation_speed': 'normal',
 					'theme': 'dark_rounded',
 					'slideshow': 3000,

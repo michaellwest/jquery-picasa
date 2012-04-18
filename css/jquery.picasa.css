@@ -6,9 +6,16 @@ body {
 	display: inline-block !important;
 	background: none !important;
 }
+
 .picasa-image {
 	display: inline-block;
 	margin: 10px;
+}
+
+.picasa-image:hover {
+	border: 3px solid #efefef;
+	margin: 7px;
+	border-radius: 5px;
 }
 
 .picasa-image-title {
@@ -19,9 +26,9 @@ body {
 
 .picasa-image-thumb {
 	padding: 7px;
-	padding-bottom: 3px;
+	border: none;
 }
 
 .loader {
-	padding: 57px;
+	margin: 73px;
 }
