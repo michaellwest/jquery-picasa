@@ -233,7 +233,7 @@
 			if (album && !(album instanceof Array)) {
 				methods.images(username, album, function (photos) {
 					if (callback && defaultOptions.overrideLayout) {
-						callback.apply(scope, photos);
+						callback.apply(scope, [photos]);
 					} else {
 						var div = $(document.createElement('div')).addClass('picasa-album');
 						$.each(photos, function (index, photo) {
@@ -251,7 +251,7 @@
 			} else {
 				methods.albums(username, function (photos) {
 					if (callback && defaultOptions.overrideLayout) {
-						callback.apply(scope, photos);
+						callback.apply(scope, [photos]);
 					} else {
 						$.each(photos, function (index, photo) {
 							if (!album || album.indexOf(photo.id) !== -1) {

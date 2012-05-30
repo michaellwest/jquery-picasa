@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>sample-images-custom</title>
+<!--[if IE]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<style>
+  article, aside, figure, footer, header, hgroup, 
+  menu, nav, section { display: block; }
+</style>
+<link rel="stylesheet" type="text/css" href="css/jquery.picasa.css" media="screen" />
+</head>
+<body>
+  <div id="picasa-gallery">
+  </div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.picasa.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			var userId = "104806763597775491739";
+			var albumId = "5703952790631045089";
+
+			$('#picasa-gallery').picasa('init', {
+				'overrideLayout': true
+			}).picasa('gallery', userId, albumId, function (photos) {
+				$.each(photos, function (key, value) {
+					console.log('key: ' + key + ', value: ' + value);
+				});
+			});
+		});
+	</script>
+</body>
+</html>
